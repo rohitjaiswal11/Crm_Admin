@@ -893,6 +893,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.7"
+  local_notifications:
+    dependency: "direct main"
+    description:
+      name: local_notifications
+      sha256: "7ac29c3ede3b4c75bebdc533172fb55e2ce4f8b552994689fea22ca02cb872f5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.7"
   logging:
     dependency: transitive
     description:

@@ -15,6 +15,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lbm_crm/Location/locationService.dart';
 import 'package:lbm_crm/splashScreen.dart';
+import 'package:lbm_crm/util/Notifiation_service.dart';
 import 'package:lbm_crm/util/RouteGenerator.dart';
 import 'package:lbm_crm/util/app_key.dart';
 import 'package:lbm_crm/util/colors.dart';
@@ -37,69 +38,69 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  log("Handling a background message: ${message.messageId}/n ${message.toMap().toString()}");
-  PushNotification notification = PushNotification(
-    title: message.notification?.title,
-    body: message.notification?.body,
-    dataTitle: message.data['title'],
-    dataBody: message.data['body'],
-  );
-  final _notificationInfo = notification;
-  showOverlayNotification(
-    (context) {
-      return Material(
-        // shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.circular(10),
-        //     side: BorderSide(color: Colors.white, width: 0.3)),
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   log("Handling a background message: ${message.messageId}/n ${message.toMap().toString()}");
+//   PushNotification notification = PushNotification(
+//     title: message.notification?.title,
+//     body: message.notification?.body,
+//     dataTitle: message.data['title'],
+//     dataBody: message.data['body'],
+//   );
+//   final _notificationInfo = notification;
+//   showOverlayNotification(
+//     (context) {
+//       return Material(
+//         // shape: RoundedRectangleBorder(
+//         //     borderRadius: BorderRadius.circular(10),
+//         //     side: BorderSide(color: Colors.white, width: 0.3)),
 
-        // elevation: 1,
-        color: Colors.transparent,
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: ListTile(
-            selected: true,
-            selectedTileColor: ColorCollection.white,
-            selectedColor: ColorCollection.backColor,
-            title: SizedBox(
-                width: MediaQuery.of(context).size.width - 50,
-                child: Text(
-                  _notificationInfo.title ?? 'CRM',
-                  style: TextStyle(fontWeight: FontWeight.w700),
-                  overflow: TextOverflow.ellipsis,
-                )),
-            subtitle: SizedBox(
-                width: MediaQuery.of(context).size.width - 50,
-                child: Text(
-                  _notificationInfo.body ?? '',
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                  overflow: TextOverflow.ellipsis,
-                )),
-            leading: Image.asset(
-              'assets/appLogo.png',
-              height: 50,
-              width: 50,
-            ),
-            trailing: IconButton(
-                onPressed: () {
-                  OverlaySupportEntry.of(context)?.dismiss();
-                },
-                icon: Icon(Icons.close)),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-                side: BorderSide(color: ColorCollection.backColor, width: 0.3)),
-          ),
-        ),
-      );
-    },
-    // Text(_notificationInfo!.title ?? 'CRM'),
-    // leading: NotificationBadge(totalNotifications: _totalNotifications),
-    // Text(_notificationInfo!.body ?? '-'),
-    context: CommanClass.navState.currentContext,
-    position: NotificationPosition.top,
-    duration: Duration(seconds: 3),
-  );
-}
+//         // elevation: 1,
+//         color: Colors.transparent,
+//         child: Padding(
+//           padding: EdgeInsets.all(10),
+//           child: ListTile(
+//             selected: true,
+//             selectedTileColor: ColorCollection.white,
+//             selectedColor: ColorCollection.backColor,
+//             title: SizedBox(
+//                 width: MediaQuery.of(context).size.width - 50,
+//                 child: Text(
+//                   _notificationInfo.title ?? 'CRM',
+//                   style: TextStyle(fontWeight: FontWeight.w700),
+//                   overflow: TextOverflow.ellipsis,
+//                 )),
+//             subtitle: SizedBox(
+//                 width: MediaQuery.of(context).size.width - 50,
+//                 child: Text(
+//                   _notificationInfo.body ?? '',
+//                   style: TextStyle(fontWeight: FontWeight.w600),
+//                   overflow: TextOverflow.ellipsis,
+//                 )),
+//             leading: Image.asset(
+//               'assets/appLogo.png',
+//               height: 50,
+//               width: 50,
+//             ),
+//             trailing: IconButton(
+//                 onPressed: () {
+//                   OverlaySupportEntry.of(context)?.dismiss();
+//                 },
+//                 icon: Icon(Icons.close)),
+//             shape: RoundedRectangleBorder(
+//                 borderRadius: BorderRadius.circular(10),
+//                 side: BorderSide(color: ColorCollection.backColor, width: 0.3)),
+//           ),
+//         ),
+//       );
+//     },
+//     // Text(_notificationInfo!.title ?? 'CRM'),
+//     // leading: NotificationBadge(totalNotifications: _totalNotifications),
+//     // Text(_notificationInfo!.body ?? '-'),
+//     context: CommanClass.navState.currentContext,
+//     position: NotificationPosition.top,
+//     duration: Duration(seconds: 3),
+//   );
+// }
 
 Future<void> initializeService() async {
   final service = FlutterBackgroundService();
@@ -192,9 +193,13 @@ void onStart(ServiceInstance service) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await initializeService();
+  //await initializeService();
 
   await Firebase.initializeApp();
+
+  await FirebaseMessaging.instance.requestPermission();
+  
+  await Notification_Helper.initialize(flutterLocalPlugin);
   HttpOverrides.global = MyHttpOverrides();
 
   runApp(EasyLocalization(
@@ -229,127 +234,127 @@ class _MyAppState extends State<MyApp> {
   void registerNotification() async {
     _messaging = FirebaseMessaging.instance;
 
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
-      announcement: false,
+      announcement: true,
       badge: true,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
       sound: true,
     );
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      log('User granted permission');
-      SharedPreferenceClass.SetSharedData("TokenKey",
-          "AAAAMue_ylA:APA91bHIASApWJVz-VTt2PJ0wVGo4lik1x9OtO290ECgYgFemSBFM6R5uRDdLHO_riqN9XQO12r2AJwu1j-BjSp7zZpHVdZopjCsOuqOLB5E0bPKtyfLauV97cRqI9ZfTCCrMu2spAHy");
-      _messaging.getToken().then((token) {
-        log("$token");
-        SharedPreferenceClass.SetSharedData("TokenID", token);
-      });
-      FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        log('Message title: ${message.notification?.title}, body: ${message.notification?.body!.split("_")}, data: ${message.data}');
+//     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+//       log('User granted permission');
+//       SharedPreferenceClass.SetSharedData("TokenKey",
+//           "AAAAMue_ylA:APA91bHIASApWJVz-VTt2PJ0wVGo4lik1x9OtO290ECgYgFemSBFM6R5uRDdLHO_riqN9XQO12r2AJwu1j-BjSp7zZpHVdZopjCsOuqOLB5E0bPKtyfLauV97cRqI9ZfTCCrMu2spAHy");
+//       _messaging.getToken().then((token) {
+//         log("$token");
+//         SharedPreferenceClass.SetSharedData("TokenID", token);
+//       });
+//       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+//         log('Message title: ${message.notification?.title}, body: ${message.notification?.body!.split("_")}, data: ${message.data}');
   
 
 
-         log(message.toMap().toString());
+//          log(message.toMap().toString());
 
-        // Parse the message received
-        PushNotification notification = PushNotification(
-          title: message.notification?.title,
-          body: message.notification?.body,
-          dataTitle: message.data['title'],
-          dataBody: message.data['body'],
-        );
-//
+//         // Parse the message received
+//         PushNotification notification = PushNotification(
+//           title: message.notification?.title,
+//           body: message.notification?.body,
+//           dataTitle: message.data['title'],
+//           dataBody: message.data['body'],
+//         );
+// //
 
-//vcv
-        setState(() {
-          _notificationInfo = notification;
-        });
+// //vcv
+//         setState(() {
+//           _notificationInfo = notification;
+//         });
 
-        if (_notificationInfo != null) {
-          // For displaying the notification as an overlay
+//         if (_notificationInfo != null) {
+//           // For displaying the notification as an overlay
 
-          // showSimpleNotification(
-          //   Text(_notificationInfo!.title ?? 'CRM'),
-          //   // leading: NotificationBadge(totalNotifications: _totalNotifications),
-          //   subtitle: Text(_notificationInfo!.body ?? '-'),
-          //   context: CommanClass.navState.currentContext,
-          //   background: ColorCollection.backColor,
-          //   duration: Duration(seconds: 3),
-          //   slideDismissDirection: DismissDirection.startToEnd,
+//           // showSimpleNotification(
+//           //   Text(_notificationInfo!.title ?? 'CRM'),
+//           //   // leading: NotificationBadge(totalNotifications: _totalNotifications),
+//           //   subtitle: Text(_notificationInfo!.body ?? '-'),
+//           //   context: CommanClass.navState.currentContext,
+//           //   background: ColorCollection.backColor,
+//           //   duration: Duration(seconds: 3),
+//           //   slideDismissDirection: DismissDirection.startToEnd,
 
-          //   elevation: 5,
-          // );
+//           //   elevation: 5,
+//           // );
 
-          showOverlayNotification(
-            (context) {
-              return Material(
-                // shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(10),
-                //     side: BorderSide(color: Colors.white, width: 0.3)),
+//           showOverlayNotification(
+//             (context) {
+//               return Material(
+//                 // shape: RoundedRectangleBorder(
+//                 //     borderRadius: BorderRadius.circular(10),
+//                 //     side: BorderSide(color: Colors.white, width: 0.3)),
 
-                // elevation: 1,
-                color: Colors.transparent,
-                child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: ListTile(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ChatScreen()));
-                    },
-                    selected: true,
-                    selectedTileColor: ColorCollection.white,
-                    selectedColor: ColorCollection.backColor,
-                    title: SizedBox(
-                        width: MediaQuery.of(context).size.width - 50,
-                        child: Text(
-                          _notificationInfo!.title ?? 'CRM',
-                          style: TextStyle(fontWeight: FontWeight.w700),
-                          overflow: TextOverflow.ellipsis,
-                        )),
-                    subtitle: SizedBox(
-                        width: MediaQuery.of(context).size.width - 50,
-                        child: Text(
-                          _notificationInfo!.body ?? '',
-                          style: TextStyle(fontWeight: FontWeight.w600),
-                          overflow: TextOverflow.ellipsis,
-                        )),
-                    leading: Image.asset(
-                      'assets/appLogo.png',
-                      height: 50,
-                      width: 50,
-                    ),
-                    trailing: IconButton(
-                        onPressed: () {
-                          OverlaySupportEntry.of(context)?.dismiss();
-                        },
-                        icon: Icon(Icons.close)),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        side: BorderSide(
-                            color: ColorCollection.backColor, width: 0.3)),
-                  ),
-                ),
-              );
-            },
-            // Text(_notificationInfo!.title ?? 'CRM'),
-            // leading: NotificationBadge(totalNotifications: _totalNotifications),
-            // Text(_notificationInfo!.body ?? '-'),
-            context: CommanClass.navState.currentContext,
-            position: NotificationPosition.top,
-            duration: Duration(seconds: 3),
-          );
-        }
-      });
-    } else {
-      log('User declined or has not accepted permission');
-    }
+//                 // elevation: 1,
+//                 color: Colors.transparent,
+//                 child: Padding(
+//                   padding: EdgeInsets.all(10),
+//                   child: ListTile(
+//                     onTap: () {
+//                       Navigator.push(
+//                           context,
+//                           MaterialPageRoute(
+//                               builder: (context) => ChatScreen()));
+//                     },
+//                     selected: true,
+//                     selectedTileColor: ColorCollection.white,
+//                     selectedColor: ColorCollection.backColor,
+//                     title: SizedBox(
+//                         width: MediaQuery.of(context).size.width - 50,
+//                         child: Text(
+//                           _notificationInfo!.title ?? 'CRM',
+//                           style: TextStyle(fontWeight: FontWeight.w700),
+//                           overflow: TextOverflow.ellipsis,
+//                         )),
+//                     subtitle: SizedBox(
+//                         width: MediaQuery.of(context).size.width - 50,
+//                         child: Text(
+//                           _notificationInfo!.body ?? '',
+//                           style: TextStyle(fontWeight: FontWeight.w600),
+//                           overflow: TextOverflow.ellipsis,
+//                         )),
+//                     leading: Image.asset(
+//                       'assets/appLogo.png',
+//                       height: 50,
+//                       width: 50,
+//                     ),
+//                     trailing: IconButton(
+//                         onPressed: () {
+//                           OverlaySupportEntry.of(context)?.dismiss();
+//                         },
+//                         icon: Icon(Icons.close)),
+//                     shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(10),
+//                         side: BorderSide(
+//                             color: ColorCollection.backColor, width: 0.3)),
+//                   ),
+//                 ),
+//               );
+//             },
+//             // Text(_notificationInfo!.title ?? 'CRM'),
+//             // leading: NotificationBadge(totalNotifications: _totalNotifications),
+//             // Text(_notificationInfo!.body ?? '-'),
+//             context: CommanClass.navState.currentContext,
+//             position: NotificationPosition.top,
+//             duration: Duration(seconds: 3),
+//           );
+//         }
+//       });
+//     } else {
+//       log('User declined or has not accepted permission');
+//     }
   }
 
   // For handling notification when the app is in terminated state
@@ -380,44 +385,44 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     _initSpeech();
-    registerNotification();
+    //registerNotification();
     checkForInitialMessage();
 
     // For handling notification when the app is in background
     // but not terminated
 
     getColors();
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      setState(() {
-        CommanClass.notifcationTapped = true;
-        CommanClass.noticationMessage = message;
-      });
-      log('notification Tapped == > $message');
-      log(message.toMap().toString());
-      if (CommanClass.isLogin) {
-        if (CommanClass.StaffId != '') {
-          Navigator.pushNamedAndRemoveUntil(
-          //##
-            CommanClass.navState.currentContext!,
-            BottomBar.id,
-            (route) => false,
-          );
-        }
-      } else {
-        log(' ELse Case 1');
-      }
+    // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    //   setState(() {
+    //     CommanClass.notifcationTapped = true;
+    //     CommanClass.noticationMessage = message;
+    //   });
+    //   log('notification Tapped == > $message');
+    //   log(message.toMap().toString());
+    //   if (CommanClass.isLogin) {
+    //     if (CommanClass.StaffId != '') {
+    //       Navigator.pushNamedAndRemoveUntil(
+    //       //##
+    //         CommanClass.navState.currentContext!,
+    //         BottomBar.id,
+    //         (route) => false,
+    //       );
+    //     }
+    //   } else {
+    //     log(' ELse Case 1');
+    //   }
 
-      PushNotification notification = PushNotification(
-        title: message.notification?.title,
-        body: message.notification?.body,
-        dataTitle: message.data['title'],
-        dataBody: message.data['body'],
-      );
+    //   PushNotification notification = PushNotification(
+    //     title: message.notification?.title,
+    //     body: message.notification?.body,
+    //     dataTitle: message.data['title'],
+    //     dataBody: message.data['body'],
+    //   );
 
-      setState(() {
-        _notificationInfo = notification;
-      });
-    });
+    //   setState(() {
+    //     _notificationInfo = notification;
+    //   });
+    // });
 
     super.initState();
   }
@@ -541,50 +546,50 @@ class PushNotification {
   String? dataBody;
 }
 
-class TestScreen extends StatefulWidget {
-  const TestScreen({Key? key}) : super(key: key);
+// class TestScreen extends StatefulWidget {
+//   const TestScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TestScreen> createState() => TestScreenState();
-}
+//   @override
+//   State<TestScreen> createState() => TestScreenState();
+// }
 
-class TestScreenState extends State<TestScreen> {
-  List dataList = [];
+// class TestScreenState extends State<TestScreen> {
+//   List dataList = [];
 
-  @override
-  void initState() {
-    if (CommanClass.noticationMessage != null) {
-      dataList.add(CommanClass.noticationMessage!.data['data']);
-    }
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     if (CommanClass.noticationMessage != null) {
+//       dataList.add(CommanClass.noticationMessage!.data['data']);
+//     }
+//     super.initState();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              '${CommanClass.notifcationTapped} }',
-            ),
-            if (CommanClass.noticationMessage != null)
-              Text(
-                '${CommanClass.noticationMessage!.data['root']}}',
-              ),
-            if (CommanClass.noticationMessage != null)
-              Text(
-                '${CommanClass.noticationMessage!.data['data']}}',
-              ),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//         body: Center(
+//       child: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             Text(
+//               '${CommanClass.notifcationTapped} }',
+//             ),
+//             if (CommanClass.noticationMessage != null)
+//               Text(
+//                 '${CommanClass.noticationMessage!.data['root']}}',
+//               ),
+//             if (CommanClass.noticationMessage != null)
+//               Text(
+//                 '${CommanClass.noticationMessage!.data['data']}}',
+//               ),
 
-            // if (CommanClass.noticationMessage != null)
-            //   Text(
-            //     '${dataList[0]['name'].toString()}',
-            //   ),
-          ],
-        ),
-      ),
-    ));
-  }
-}
+//             // if (CommanClass.noticationMessage != null)
+//             //   Text(
+//             //     '${dataList[0]['name'].toString()}',
+//             //   ),
+//           ],
+//         ),
+//       ),
+//     ));
+//   }
+// }
