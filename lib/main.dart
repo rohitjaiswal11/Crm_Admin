@@ -199,7 +199,7 @@ Future<void> main() async {
 
   await FirebaseMessaging.instance.requestPermission();
   
-  await Notification_Helper.initialize(flutterLocalPlugin);
+  //await Notification_Helper.initialize(flutterLocalPlugin);
   HttpOverrides.global = MyHttpOverrides();
 
   runApp(EasyLocalization(

@@ -5,7 +5,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
 import 'package:lbm_crm/Invoice/invoiceView.dart';
 import 'package:lbm_crm/Leads/addReminder.dart';

@@ -8,7 +8,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:lbm_crm/util/APIClasses.dart';
 import 'package:lbm_crm/util/ToastClass.dart';
 import 'package:lbm_crm/util/storage_manger.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../util/LicenceKey.dart';
 import 'package:geocoding/geocoding.dart';

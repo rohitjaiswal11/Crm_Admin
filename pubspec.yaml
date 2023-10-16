@@ -45,7 +45,7 @@ dependencies:
   flutter_colorpicker:
   provider:
   shared_preferences:
-  lbm_plugin:
+  #lbm_plugin:
   http:
   shimmer:
   fluttertoast:

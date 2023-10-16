@@ -8,9 +8,10 @@ import 'package:lbm_crm/util/APIClasses.dart';
 import 'package:lbm_crm/util/LicenceKey.dart';
 import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/constants.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
 import 'package:shimmer/shimmer.dart';
 
+import '../../LBM_Plugin/lbmplugin.dart';
 import '../../util/ToastClass.dart';
 
 class ReminderList extends StatefulWidget {

@@ -13,7 +13,8 @@ import 'package:lbm_crm/util/app_key.dart';
 import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../util/storage_manger.dart';

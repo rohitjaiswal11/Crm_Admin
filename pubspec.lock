@@ -821,14 +821,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.0"
-  lbm_plugin:
-    dependency: "direct main"
-    description:
-      name: lbm_plugin
-      sha256: be0dd1d87e424b0551174e55dd42229c9780650efb5899c0490b11480abdcfbf
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.6"
   linkify:
     dependency: transitive
     description:

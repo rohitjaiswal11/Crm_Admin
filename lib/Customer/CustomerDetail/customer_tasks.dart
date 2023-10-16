@@ -6,8 +6,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:lbm_crm/Tasks/add_new_tasks.dart';
 import 'package:lbm_crm/util/constants.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
 
+
+
+import '../../LBM_Plugin/lbmplugin.dart';
 import '../../Tasks/task_detail_screen.dart';
 import '../../Tasks/tasks_screen.dart';
 import '../../util/APIClasses.dart';

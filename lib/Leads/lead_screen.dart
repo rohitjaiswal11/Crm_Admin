@@ -6,7 +6,8 @@ import 'dart:developer';
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:lbm_crm/Leads/add_new_lead.dart';
 import 'package:lbm_crm/util/APIClasses.dart';
 import 'package:lbm_crm/util/LicenceKey.dart';

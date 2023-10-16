@@ -4,7 +4,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:lbm_crm/Projects/projects_screen.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 
 import '../Projects/project_details_screen.dart';
 import '../util/APIClasses.dart';

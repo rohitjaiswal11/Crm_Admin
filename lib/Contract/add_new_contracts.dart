@@ -6,7 +6,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lbm_crm/util/commonClass.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
 import 'package:lbm_crm/util/APIClasses.dart';
 import 'package:lbm_crm/util/LicenceKey.dart';

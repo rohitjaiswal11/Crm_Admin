@@ -6,8 +6,10 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
 
+
+
+import '../../LBM_Plugin/lbmplugin.dart';
 import '../../util/APIClasses.dart';
 import '../../util/LicenceKey.dart';
 import '../../util/ToastClass.dart';

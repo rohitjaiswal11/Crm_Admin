@@ -11,7 +11,8 @@ import 'package:lbm_crm/util/LicenceKey.dart';
 import 'package:lbm_crm/util/ToastClass.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/storage_manger.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'util/Authenticatin/createPasswordScreen.dart';

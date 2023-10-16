@@ -14,7 +14,8 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
 import 'package:lbm_crm/util/routesArguments.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 
 import '../util/ToastClass.dart';

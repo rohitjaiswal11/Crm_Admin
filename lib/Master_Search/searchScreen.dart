@@ -16,7 +16,8 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/routesArguments.dart';
 import 'package:lbm_crm/util/storage_manger.dart';
-import 'package:lbm_plugin/lbm_plugin.dart';
+
+import '../LBM_Plugin/lbmplugin.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
