@@ -11,7 +11,7 @@ import 'package:lbm_crm/util/constants.dart';
 
 import 'package:shimmer/shimmer.dart';
 
-import '../../LBM_Plugin/lbmplugin.dart';
+import '../../Plugin/lbmplugin.dart';
 import '../../util/ToastClass.dart';
 
 class ReminderList extends StatefulWidget {

@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:lbm_crm/Support/support_screen.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 
 import '../Support/add_new_ticket.dart';
 import '../Support/support_detail_screen.dart';

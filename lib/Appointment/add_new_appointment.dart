@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+//import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
@@ -13,8 +14,9 @@ import 'package:lbm_crm/util/app_key.dart';
 import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/constants.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
+import '../Plugin/lbmplugin.dart';
+import '../searchable drop/src/searchable_dropdown.dart';
+
 
 class AddNewAppointment extends StatefulWidget {
   static const id = '/AddNewAppointments';

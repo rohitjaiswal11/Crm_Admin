@@ -13,8 +13,9 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
 import 'package:marquee_widget/marquee_widget.dart';
+
+import '../Plugin/lbmplugin.dart';
 
 class ChatScreen extends StatefulWidget {
   static const id = '/Chat';
@@ -51,6 +52,7 @@ final searchController  = TextEditingController();
   }
 
   Future<void> getChatList() async {
+  
     final paramDic = {'staff_id': CommanClass.StaffId};
 
     // try {
@@ -68,7 +70,7 @@ final searchController  = TextEditingController();
               name: (data['user_data'][i]['firstname'] ?? '').toString() +
                   ' ' +
                   (data['user_data'][i]['lastname']).toString(),
-              imageSource: data['user_data'][i]['profile_image'],
+              imageSource: data['user_data'][i]['profile_image']??"",
               staffID: data['user_data'][i]['staffid']));
 
         }
@@ -85,7 +87,7 @@ final searchController  = TextEditingController();
               firstName: data['group_data'][i]['group_name'] ?? '',
               lastName: '',
               name: data['group_data'][i]['group_name'] ?? '',
-              imageSource: data['group_data'][i]['profile_image'],
+              imageSource: data['group_data'][i]['profile_image']??"",
               staffID: data['group_data'][i]['id']));
         }
        groupListFilter.clear;
@@ -101,7 +103,7 @@ final searchController  = TextEditingController();
               name: (data['client_data'][i]['firstname'] ?? '').toString() +
                   ' ' +
                   (data['client_data'][i]['lastname']).toString(),
-              imageSource: data['client_data'][i]['profile_image'],
+              imageSource: data['client_data'][i]['profile_image']??"",
               staffID: data['client_data'][i]['id']));
         }
 
@@ -349,92 +351,96 @@ if(searchController.text.isEmpty){
                     height: height * 0.65,
                     child: loading
                         ? Center(child: CircularProgressIndicator())
-                        : TabBarView(
-                            physics: NeverScrollableScrollPhysics(),
-                            controller: _tabController,
-                            children: [
-                                SizedBox(
-                                  height: height * 0.5,
-                                  child: staffList.isEmpty
-                                      ? Center(
-                                          child: Text('No Data Found'),
-                                        )
-                                      : ListView.builder(
-                                          itemCount: staffList.length,
-                                          itemBuilder: (c, i) => chatContainer(
-                                              height: height,
-                                              width: width,
-                                              name: staffList[i].name,
-                                              imageSource:
-                                                  staffList[i].imageSource,
-                                              chat: staffList[i],
-                                              onTap: () {
-                                                Navigator.pushNamed(
-                                                    context, ChatDetail.id,
-                                                    arguments: {
-                                                      'type': 'Chat',
-                                                      'id':
-                                                          staffList[i].staffID,
-                                                      'data': staffList[i]
-                                                    });
-                                              }),
-                                        ),
-                                ),
-                                SizedBox(
-                                  height: height * 0.5,
-                                  child: groupList.isEmpty
-                                      ? Center(
-                                          child: Text('No Data Found'),
-                                        )
-                                      : ListView.builder(
-                                          itemCount: groupList.length,
-                                          itemBuilder: (c, i) => chatContainer(
-                                              height: height,
-                                              width: width,
-                                              name: groupList[i].name,
-                                              imageSource:
-                                                  groupList[i].imageSource,
-                                              chat: groupList[i],
-                                              onTap: () {
-                                                Navigator.pushNamed(
-                                                    context, ChatDetail.id,
-                                                    arguments: {
-                                                      'type': 'Group',
-                                                      'id':
-                                                          groupList[i].staffID,
-                                                      'data': groupList[i]
-                                                    });
-                                              }),
-                                        ),
-                                ),
-                                SizedBox(
-                                  height: height * 0.5,
-                                  child: clientList.isEmpty
-                                      ? Center(
-                                          child: Text('No Data Found'),
-                                        )
-                                      : ListView.builder(
-                                          itemCount: clientList.length,
-                                          itemBuilder: (c, i) => chatContainer(
-                                              height: height,
-                                              width: width,
-                                              name: clientList[i].name,
-                                              imageSource:
-                                                  clientList[i].imageSource,
-                                              chat: clientList[i],
-                                              onTap: () {
-                                                Navigator.pushNamed(
-                                                    context, ChatDetail.id,
-                                                    arguments: {
-                                                      'type': 'Client',
-                                                      'id':
-                                                          clientList[i].staffID,
-                                                      'data': clientList[i]
-                                                    });
-                                              }),
-                                        ),
-                                ),
-                              ]),
+                        : Visibility(
+                          visible: true,
+                          child: TabBarView(
+                              physics: NeverScrollableScrollPhysics(),
+                              controller: _tabController,
+                              children: [
+                                  SizedBox(
+                                    height: height * 0.5,
+                                    child: staffList.isEmpty
+                                        ? Center(
+                                            child: Text('No Data Found'),
+                                          )
+                                        : ListView.builder(
+                                            itemCount: staffList.length,
+                                            itemBuilder: (c, i) => chatContainer(
+                                                height: height,
+                                                width: width,
+                                                name: staffList[i].name,
+                                                imageSource:
+                                                    staffList[i].imageSource,
+                                                chat: staffList[i],
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                      context, ChatDetail.id,
+                                                      arguments: {
+                                                                        
+                                                        'type': 'Chat',
+                                                        'id':
+                                                            staffList[i].staffID,
+                                                        'data': staffList[i]
+                                                      });
+                                                }),
+                                          ),
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.5,
+                                    child: groupList.isEmpty
+                                        ? Center(
+                                            child: Text('No Data Found'),
+                                          )
+                                        : ListView.builder(
+                                            itemCount: groupList.length,
+                                            itemBuilder: (c, i) => chatContainer(
+                                                height: height,
+                                                width: width,
+                                                name: groupList[i].name,
+                                                imageSource:
+                                                    groupList[i].imageSource,
+                                                chat: groupList[i],
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                      context, ChatDetail.id,
+                                                      arguments: {
+                                                        'type': 'Group',
+                                                        'id':
+                                                            groupList[i].staffID,
+                                                        'data': groupList[i]
+                                                      });
+                                                }),
+                                          ),
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.5,
+                                    child: clientList.isEmpty
+                                        ? Center(
+                                            child: Text('No Data Found'),
+                                          )
+                                        : ListView.builder(
+                                            itemCount: clientList.length,
+                                            itemBuilder: (c, i) => chatContainer(
+                                                height: height,
+                                                width: width,
+                                                name: clientList[i].name,
+                                                imageSource:
+                                                    clientList[i].imageSource,
+                                                chat: clientList[i],
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                      context, ChatDetail.id,
+                                                      arguments: {
+                                                        'type': 'Client',
+                                                        'id':
+                                                            clientList[i].staffID,
+                                                        'data': clientList[i]
+                                                      });
+                                                }),
+                                          ),
+                                  ),
+                                ]),
+                        ),
                   ),
 
                   

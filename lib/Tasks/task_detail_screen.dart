@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+// import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
 import 'package:http/http.dart' as http;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +26,11 @@ import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
 import 'package:lbm_crm/util/storage_manger.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+
+
+import '../Plugin/lbmplugin.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
 
 import '../Contract/add_new_contracts.dart';
 import '../Customer/CustomerDetail/customer_detail_screen.dart';
@@ -41,6 +43,7 @@ import '../Projects/add_new_project.dart';
 import '../Projects/project_details_screen.dart';
 import '../Proposals/add_new_proposals.dart';
 import '../Support/support_detail_screen.dart';
+import '../searchable drop/src/searchable_dropdown.dart';
 import '../util/routesArguments.dart';
 
 class TaskDetailScreen extends StatefulWidget {
@@ -885,6 +888,16 @@ class TaskDetailsScrenState extends State<TaskDetailScreen> {
                                             height: 10,
                                           ),
                                           Text("* Set reminder to"),
+
+// SearchableDropdown<int>(
+//     hintText: const Text('List of items'),
+//     margin: const EdgeInsets.all(15),
+//     items: List.generate(10, (i) => SearchableDropdownMenuItem(value: i, label: 'item $i', child: Text('item $i'))),
+//     onChanged: (int? value) {
+//         debugPrint('$value');
+//     },
+// ),
+
                                           SearchableDropdown.single(
                                             items: assign,
                                             value: selectrem,
@@ -1092,6 +1105,17 @@ class TaskDetailsScrenState extends State<TaskDetailScreen> {
                                                                 ),
                                                                 Text(
                                                                     "* Set reminder to"),
+
+
+
+//                                                                     SearchableDropdown<int>(
+//     hintText: const Text('List of items'),
+//     margin: const EdgeInsets.all(15),
+//     items: List.generate(10, (i) => SearchableDropdownMenuItem(value: i, label: 'item $i', child: Text('item $i'))),
+//     onChanged: (int? value) {
+//         debugPrint('$value');
+//     },
+// )
                                                                 SearchableDropdown
                                                                     .single(
                                                                   items: assign,
@@ -1326,39 +1350,41 @@ class TaskDetailsScrenState extends State<TaskDetailScreen> {
                                                             ),
                                                             Text(
                                                                 "* Set reminder to"),
-                                                            SearchableDropdown
-                                                                .single(
-                                                              items: assign,
-                                                              value: selectrem,
-                                                              hint:
-                                                                  "Select Assignee",
-                                                              searchHint:
-                                                                  "Select one",
-                                                              onChanged:
-                                                                  (value) {
-                                                                setState(() {
-                                                                  rem = true;
-                                                                  selectrem =
-                                                                      value;
-                                                                  CommanClass
-                                                                      .remid = Assignee[int.parse(selectrem
-                                                                          .toString()
-                                                                          .split(
-                                                                              '/')[0])]['staffid']
-                                                                      .toString();
-                                                                  CommanClass
-                                                                      .remname = Assignee[int.parse(selectrem
-                                                                          .toString()
-                                                                          .split(
-                                                                              '/')[0])]['full_name']
-                                                                      .toString();
-                                                                  // assigneeList.addAll(Assignee[int.parse(selectassignee.toString().split('/')[0])]['staffid'].);
 
-                                                                  // addAssignee(allTaskData[0]['id'].toString(),CommanClass.assigneeid.toString());
-                                                                });
-                                                              },
-                                                              isExpanded: true,
-                                                            ),
+                                                                
+                                                            // SearchableDropdown
+                                                            //     .single(
+                                                            //   items: assign,
+                                                            //   value: selectrem,
+                                                            //   hint:
+                                                            //       "Select Assignee",
+                                                            //   searchHint:
+                                                            //       "Select one",
+                                                            //   onChanged:
+                                                            //       (value) {
+                                                            //     setState(() {
+                                                            //       rem = true;
+                                                            //       selectrem =
+                                                            //           value;
+                                                            //       CommanClass
+                                                            //           .remid = Assignee[int.parse(selectrem
+                                                            //               .toString()
+                                                            //               .split(
+                                                            //                   '/')[0])]['staffid']
+                                                            //           .toString();
+                                                            //       CommanClass
+                                                            //           .remname = Assignee[int.parse(selectrem
+                                                            //               .toString()
+                                                            //               .split(
+                                                            //                   '/')[0])]['full_name']
+                                                            //           .toString();
+                                                            //       // assigneeList.addAll(Assignee[int.parse(selectassignee.toString().split('/')[0])]['staffid'].);
+
+                                                            //       // addAssignee(allTaskData[0]['id'].toString(),CommanClass.assigneeid.toString());
+                                                            //     });
+                                                            //   },
+                                                            //   isExpanded: true,
+                                                            // ),
                                                             SizedBox(
                                                               height: 10,
                                                             ),
@@ -1685,6 +1711,15 @@ class TaskDetailsScrenState extends State<TaskDetailScreen> {
                         ),
                       ],
                     ),
+
+//                     SearchableDropdown<int>(
+//     hintText: const Text('List of items'),
+//     margin: const EdgeInsets.all(15),
+//     items: List.generate(10, (i) => SearchableDropdownMenuItem(value: i, label: 'item $i', child: Text('item $i'))),
+//     onChanged: (int? value) {
+//         debugPrint('$value');
+//     },
+// )
                     SearchableDropdown.single(
                       items: follow,
                       value: selectfollow,
@@ -1705,7 +1740,7 @@ class TaskDetailsScrenState extends State<TaskDetailScreen> {
                       },
                       isExpanded: false,
                     ),
-                    if (follows == false && allTaskData[0]['followers'] != null)
+                   if (follows == false && allTaskData[0]['followers'] != null)
                       GridView.count(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),

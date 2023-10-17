@@ -4,11 +4,14 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+// import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
 import 'package:intl/intl.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+
+
+import '../Plugin/lbmplugin.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
+
 import 'package:lbm_crm/Customer/add_new_customers.dart';
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
 import 'package:lbm_crm/util/APIClasses.dart';
@@ -20,6 +23,7 @@ import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
 
 import '../Invoice/invoiceView.dart';
+import '../searchable drop/src/searchable_dropdown.dart';
 import '../util/routesArguments.dart';
 
 class AddNewProposalScreen extends StatefulWidget {
@@ -1242,7 +1246,17 @@ class _AddNewProposalScrenState extends State<AddNewProposalScreen> {
                       ),
                       Container(
                         decoration: kDropdownContainerDeco,
-                        child: SearchableDropdown.single(
+                        child:
+//                         SearchableDropdown<int>(
+//     hintText: const Text('List of items'),
+//     margin: const EdgeInsets.all(15),
+//     items: List.generate(10, (i) => SearchableDropdownMenuItem(value: i, label: 'item $i', child: Text('item $i'))),
+//     onChanged: (int? value) {
+//         debugPrint('$value');
+//     },
+// )
+                        
+                         SearchableDropdown.single(
                           underline: '',
                           items: assigned,
                           value: selectAssigned,
@@ -1956,19 +1970,31 @@ class _AddNewProposalScrenState extends State<AddNewProposalScreen> {
     return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children:
+        
+         [
+          
+          
+//           SearchableDropdown<int>(
+//     hintText: const Text('List of items'),
+//     margin: const EdgeInsets.all(15),
+//     items: List.generate(10, (i) => SearchableDropdownMenuItem(value: i, label: 'item $i', child: Text('item $i'))),
+//     onChanged: (int? value) {
+//         debugPrint('$value');
+//     },
+// )
           SearchableDropdown.single(
             items: _relation,
             value: selectRelation,
             hint: "Select",
             style: ColorCollection.titleStyle,
             underline: '',
-            validator: (value) {
-              if (value == null) {
-                return 'This field is required';
-              }
-              return null;
-            },
+            // validator: (value) {
+            //   if (value == null) {
+            //     return 'This field is required';
+            //   }
+            // return null;
+            // },
             onChanged: (value) {
               if (value != null) {
                 setState(() {

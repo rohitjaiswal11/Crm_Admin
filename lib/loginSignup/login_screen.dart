@@ -16,7 +16,7 @@ import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/storage_manger.dart';
 import 'package:lbm_crm/widgets/bottom_navigationbar.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 
 GlobalKey<FormState> _key = GlobalKey();
 

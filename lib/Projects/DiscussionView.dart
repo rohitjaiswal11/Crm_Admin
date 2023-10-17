@@ -7,7 +7,7 @@ import 'package:lbm_crm/util/APIClasses.dart';
 import 'package:lbm_crm/util/LicenceKey.dart';
 import 'package:lbm_crm/util/colors.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 
 class DiscussionView extends StatefulWidget {
   String projectId;

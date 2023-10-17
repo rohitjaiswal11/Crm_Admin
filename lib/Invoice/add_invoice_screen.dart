@@ -4,8 +4,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+//import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
 import 'package:intl/intl.dart';
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
+import 'package:lbm_crm/searchable%20drop/src/searchable_dropdown.dart';
 import 'package:lbm_crm/util/APIClasses.dart';
 import 'package:lbm_crm/util/LicenceKey.dart';
 import 'package:lbm_crm/util/ToastClass.dart';
@@ -14,9 +16,12 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+
+
+import '../Plugin/lbmplugin.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
+
+import '../Plugin/searchable drop.dart';
 
 class AddInvoiceScreen extends StatefulWidget {
   static const id = '/addinvoice';
@@ -147,9 +152,9 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
     CommanClass.Discount = "null";
     CommanClass.Adjustment = "null";
     setState(() {
-        CommanClass.currentDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
-        _invoiceDateValue = CommanClass.currentDate;
-      });
+      CommanClass.currentDate = DateFormat("yyyy-MM-dd").format(DateTime.now());
+      _invoiceDateValue = CommanClass.currentDate;
+    });
     super.initState();
   }
 
@@ -624,12 +629,14 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
         ToastShowClass.toastShow(null, 'Failed to Post Data', Colors.red);
       }
       setState(() {
-         ToastShowClass.coolToastShow(context, data['message'], CoolAlertType.success);
+        ToastShowClass.coolToastShow(
+            context, data['message'], CoolAlertType.success);
         Navigator.pop(context);
       });
     } else {
       setState(() {
-         ToastShowClass.coolToastShow(context, data['message'], CoolAlertType.error);
+        ToastShowClass.coolToastShow(
+            context, data['message'], CoolAlertType.error);
       });
     }
   }
@@ -786,8 +793,22 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                             height: height * 0.01,
                           ),
                           Container(
-                            decoration: kDropdownContainerDeco,
-                            child: SearchableDropdown.single(
+                              decoration: kDropdownContainerDeco,
+                              // child: SearchableDropdown<int>(
+                              //   hintText: const Text('List of items'),
+                              //   margin: const EdgeInsets.all(15),
+                              //   items: List.generate(
+                              //       10,
+                              //       (i) => SearchableDropdownMenuItem(
+                              //           value: i,
+                              //           label: 'item $i',
+                              //           child: Text('item $i'))),
+                              //   onChanged: (int? value) {
+                              //     debugPrint('$value');
+                              //   },
+                              // )
+child:
+                            SearchableDropdown.single(
                               items: items,
                               underline: '',
 
@@ -869,7 +890,7 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                               },
                               isExpanded: true,
                             ),
-                          ),
+                              ),
                           SizedBox(
                             height: height * 0.02,
                           ),
@@ -1206,30 +1227,44 @@ class _AddInvoiceScreenState extends State<AddInvoiceScreen> {
                             height: height * 0.01,
                           ),
                           Container(
-                            decoration: kDropdownContainerDeco,
-                            child: SearchableDropdown.single(
-                              iconSize: 20,
-                              items: sales,
-                              underline: SizedBox(),
-                              value: selectsaleagent,
-                              hint: "Select Sale Agent",
-                              searchHint: "Select one",
-                              onChanged: (value) {
-                                if (value != null) {
-                                  log(value.toString());
-                                  setState(() {
-                                    selectsaleagent = value;
-                                    CommanClass.selectsaleagent = sale_agent[
-                                        int.parse(selectsaleagent
-                                            .toString()
-                                            .split('/')[0])]['sale_agent'];
-                                  });
-                                  log('+++++' + CommanClass.selectsaleagent);
-                                }
-                              },
-                              isExpanded: true,
-                            ),
-                          ),
+                              decoration: kDropdownContainerDeco,
+                              // child: SearchableDropdown<int>(
+                              //   hintText: const Text('List of items'),
+                              //   margin: const EdgeInsets.all(15),
+                              //   items: List.generate(
+                              //       10,
+                              //       (i) => SearchableDropdownMenuItem(
+                              //           value: i,
+                              //           label: 'item $i',
+                              //           child: Text('item $i'))),
+                              //   onChanged: (int? value) {
+                              //     debugPrint('$value');
+                              //   },
+                              // )
+child:
+                              SearchableDropdown.single(
+                                iconSize: 20,
+                                items: sales,
+                                underline: SizedBox(),
+                                value: selectsaleagent,
+                                hint: "Select Sale Agent",
+                                searchHint: "Select one",
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    log(value.toString());
+                                    setState(() {
+                                      selectsaleagent = value;
+                                      CommanClass.selectsaleagent = sale_agent[
+                                          int.parse(selectsaleagent
+                                              .toString()
+                                              .split('/')[0])]['sale_agent'];
+                                    });
+                                    log('+++++' + CommanClass.selectsaleagent);
+                                  }
+                                },
+                                isExpanded: true,
+                              ),
+                              ),
                           SizedBox(
                             height: height * 0.02,
                           ),

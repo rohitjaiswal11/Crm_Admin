@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
 import 'package:lbm_crm/Tasks/task_detail_screen.dart';

@@ -14,7 +14,7 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 
 //controller initialization
 final usernamecontroller = TextEditingController();

@@ -6,7 +6,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:lbm_crm/util/LicenceKey.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 
 import '../Tasks/add_new_tasks.dart';
 import '../Tasks/task_detail_screen.dart';

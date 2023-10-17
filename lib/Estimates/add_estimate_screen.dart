@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+// import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
 import 'package:intl/intl.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
-import 'package:number_inc_dec/number_inc_dec.dart';
-import 'package:searchable_dropdown/searchable_dropdown.dart';
-import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
+
+import '../Plugin/lbmplugin.dart';
+import 'package:number_inc_dec/number_inc_dec.dart';import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
 import 'package:lbm_crm/util/APIClasses.dart';
 import 'package:lbm_crm/util/LicenceKey.dart';
 import 'package:lbm_crm/util/ToastClass.dart';
@@ -17,6 +17,8 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/app_key.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/constants.dart';
+
+import '../searchable drop/src/searchable_dropdown.dart';
 
 class AddEstimateScreen extends StatefulWidget {
   static const id = '/addesimate';
@@ -761,88 +763,97 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
                     ),
                     Container(
                       decoration: kDropdownContainerDeco,
-                      child: SearchableDropdown.single(
-                        underline: '',
-                        items: items,
-                        value: CommanClass.Customername,
-                        hint: _customer != null && _customer != -1
-                            ? _customer['company']
-                            : "Select one",
-                        searchHint: "Select one",
-                        onChanged: (value) {
-                          if (value != null) {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            setState(() {
-                              selectedValue = value;
-                              CommanClass.Customername = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['company'] ??
-                                  '';
-                              CommanClass.Customerid = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['userid'] ??
-                                  '';
-                              CommanClass.Billing_street = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['billing_street'] ??
-                                  '';
-                              CommanClass.Billing_city = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['billing_city'] ??
-                                  '';
-                              CommanClass.Billing_state = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['billing_state'] ??
-                                  '';
-                              CommanClass.Billing_zip = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['billing_zip'] ??
-                                  '';
-                              CommanClass.Billing_country = customer[int.parse(
-                                          selectedValue
-                                              .toString()
-                                              .split('/')[0])]
-                                      ['billing_countryname'] ??
-                                  '';
-                              CommanClass.Shipping_street = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['shipping_street'] ??
-                                  '';
-                              CommanClass.Shipping_city = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['shipping_city'] ??
-                                  '';
-                              CommanClass.Shipping_state = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['shipping_state'] ??
-                                  '';
-                              CommanClass.Shipping_zip = customer[int.parse(
-                                      selectedValue
-                                          .toString()
-                                          .split('/')[0])]['shipping_zip'] ??
-                                  '';
-                              CommanClass.Shipping_country = customer[int.parse(
-                                          selectedValue
-                                              .toString()
-                                              .split('/')[0])]
-                                      ['shipping_countryname'] ??
-                                  '';
-                              print("selected" + CommanClass.Customername);
-                              // print("selected"+customer[int.parse(selectedValue.toString().split('/')[0])].toString());
-                            });
-                          }
-                        },
-                        isExpanded: true,
-                      ),
+
+//                       child: SearchableDropdown<int>(
+//     hintText: const Text('List of items'),
+//     margin: const EdgeInsets.all(15),
+//     items: List.generate(10, (i) => SearchableDropdownMenuItem(value: i, label: 'item $i', child: Text('item $i'))),
+//     onChanged: (int? value) {
+//         debugPrint('$value');
+//     },
+// ),
+                      // child: SearchableDropdown.single(
+                      //   underline: '',
+                      //   items: items,
+                      //   value: CommanClass.Customername,
+                      //   hint: _customer != null && _customer != -1
+                      //       ? _customer['company']
+                      //       : "Select one",
+                      //   searchHint: "Select one",
+                      //   onChanged: (value) {
+                      //     if (value != null) {
+                      //       FocusManager.instance.primaryFocus?.unfocus();
+                      //       setState(() {
+                      //         selectedValue = value;
+                      //         CommanClass.Customername = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['company'] ??
+                      //             '';
+                      //         CommanClass.Customerid = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['userid'] ??
+                      //             '';
+                      //         CommanClass.Billing_street = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['billing_street'] ??
+                      //             '';
+                      //         CommanClass.Billing_city = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['billing_city'] ??
+                      //             '';
+                      //         CommanClass.Billing_state = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['billing_state'] ??
+                      //             '';
+                      //         CommanClass.Billing_zip = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['billing_zip'] ??
+                      //             '';
+                      //         CommanClass.Billing_country = customer[int.parse(
+                      //                     selectedValue
+                      //                         .toString()
+                      //                         .split('/')[0])]
+                      //                 ['billing_countryname'] ??
+                      //             '';
+                      //         CommanClass.Shipping_street = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['shipping_street'] ??
+                      //             '';
+                      //         CommanClass.Shipping_city = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['shipping_city'] ??
+                      //             '';
+                      //         CommanClass.Shipping_state = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['shipping_state'] ??
+                      //             '';
+                      //         CommanClass.Shipping_zip = customer[int.parse(
+                      //                 selectedValue
+                      //                     .toString()
+                      //                     .split('/')[0])]['shipping_zip'] ??
+                      //             '';
+                      //         CommanClass.Shipping_country = customer[int.parse(
+                      //                     selectedValue
+                      //                         .toString()
+                      //                         .split('/')[0])]
+                      //                 ['shipping_countryname'] ??
+                      //             '';
+                      //         print("selected" + CommanClass.Customername);
+                      //         // print("selected"+customer[int.parse(selectedValue.toString().split('/')[0])].toString());
+                      //       });
+                      //     }
+                      //   },
+                      //   isExpanded: true,
+                      // ),
                     ),
                     SizedBox(
                       height: height * 0.02,
@@ -1167,6 +1178,15 @@ class _AddEstimateScreenState extends State<AddEstimateScreen> {
                     ),
                     Container(
                       decoration: kDropdownContainerDeco,
+
+//                       child: SearchableDropdown<int>(
+//     hintText: const Text('List of items'),
+//     margin: const EdgeInsets.all(15),
+//     items: List.generate(10, (i) => SearchableDropdownMenuItem(value: i, label: 'item $i', child: Text('item $i'))),
+//     onChanged: (int? value) {
+//         debugPrint('$value');
+//     },
+// ),
                       child: SearchableDropdown.single(
                         underline: '',
                         items: sales,

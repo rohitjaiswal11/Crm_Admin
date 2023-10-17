@@ -9,7 +9,7 @@ import 'package:lbm_crm/util/constants.dart';
 
 
 
-import '../../LBM_Plugin/lbmplugin.dart';
+import '../../Plugin/lbmplugin.dart';
 import '../../Tasks/task_detail_screen.dart';
 import '../../Tasks/tasks_screen.dart';
 import '../../util/APIClasses.dart';

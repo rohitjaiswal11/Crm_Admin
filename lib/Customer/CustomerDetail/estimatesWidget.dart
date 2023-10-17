@@ -12,7 +12,7 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/constants.dart';
 
 import '../../Estimates/add_estimate_screen.dart';
-import '../../LBM_Plugin/lbmplugin.dart';
+import '../../Plugin/lbmplugin.dart';
 import '../../util/ToastClass.dart';
 
 class EstimatesWidget extends StatefulWidget {

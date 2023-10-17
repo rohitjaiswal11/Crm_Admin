@@ -21,7 +21,7 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/commonClass.dart';
 import 'package:lbm_crm/util/storage_manger.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 import 'package:provider/provider.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
@@ -897,13 +897,14 @@ class _DashBoardScreenState extends State<DashBoardScreen>
       onClickOverlay: (target) {
         print('onClickOverlay: $target');
       },
-      onSkip: () async {
+      onSkip: ()  {
         print("skip");
-        await SharedPreferenceClass.SetSharedData('dashBoardFirstTime', false);
+        SharedPreferenceClass.SetSharedData('dashBoardFirstTime', false);
         setState(() {
           demoshowing = false;
           CommanClass.dashBoardfirtsTime = false;
         });
+        return false;
       },
     )..show(context: context);
   }

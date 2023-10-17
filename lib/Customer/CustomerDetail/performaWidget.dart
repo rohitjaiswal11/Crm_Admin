@@ -16,7 +16,7 @@ import 'package:lbm_crm/util/routesArguments.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 
 import '../../Invoice/add_invoice_screen.dart';
-import '../../LBM_Plugin/lbmplugin.dart';
+import '../../Plugin/lbmplugin.dart';
 import '../../util/ToastClass.dart';
 
 class Performa extends StatefulWidget {

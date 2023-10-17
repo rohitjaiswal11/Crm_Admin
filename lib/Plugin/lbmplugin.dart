@@ -27,8 +27,10 @@ class LbmPlugin {
 
   }
 
-static APIMainClass(
+  static Future<http.Response> APIMainClass(
       String BaseURL,String SubURL, Map<String, dynamic> paramDic, String PostGet,String api_key) async {
+                final uri = new Uri.https(BaseURL, SubURL, paramDic);
+
     switch(PostGet){
     //Get Method Work
       case "Get":
@@ -74,5 +76,7 @@ static APIMainClass(
 //
 //    return response;
 //  }
+return await http.post(uri,headers: {"Accept": "application/json",'authtoken': api_key},
+            body: paramDic);
   }
 }

@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
 import 'package:lbm_crm/Support/add_new_ticket.dart';
 import 'package:lbm_crm/util/APIClasses.dart';

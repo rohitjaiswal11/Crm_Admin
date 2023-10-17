@@ -11,7 +11,7 @@ import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/constants.dart';
 
 
-import '../../LBM_Plugin/lbmplugin.dart';
+import '../../Plugin/lbmplugin.dart';
 import '../../Projects/project_details_screen.dart';
 import '../../util/ToastClass.dart';
 import '../../util/app_key.dart';

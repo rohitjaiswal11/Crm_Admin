@@ -14,7 +14,7 @@ import 'package:lbm_crm/util/app_key.dart';
 import 'package:lbm_crm/util/colors.dart';
 import 'package:lbm_crm/util/constants.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 
 import '../Contract/add_new_contracts.dart';

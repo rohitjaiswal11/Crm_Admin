@@ -10,13 +10,13 @@ import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:http/http.dart' as http;
 import 'package:lbm_crm/util/colors.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
+import '../Plugin/lbmplugin.dart';
 import '../Support/support_detail_screen.dart';
 import '../util/APIClasses.dart';
 import '../util/LicenceKey.dart';

@@ -9,7 +9,7 @@ import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 import 'package:http/http.dart' as http;
 import 'package:lbm_crm/DashBoard/dashboard_screen.dart';
 import 'package:lbm_crm/util/APIClasses.dart';

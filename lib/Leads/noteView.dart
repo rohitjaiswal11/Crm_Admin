@@ -8,7 +8,7 @@ import 'package:lbm_crm/util/LicenceKey.dart';
 import 'package:lbm_crm/util/app_key.dart';
 import 'package:lbm_crm/util/colors.dart';
 
-import '../LBM_Plugin/lbmplugin.dart';
+import '../Plugin/lbmplugin.dart';
 import 'package:shimmer/shimmer.dart';
 
 class NoteViewDialogBox extends StatefulWidget {

@@ -9,7 +9,7 @@ import 'package:intl/intl.dart';
 
 
 
-import '../../LBM_Plugin/lbmplugin.dart';
+import '../../Plugin/lbmplugin.dart';
 import '../../util/APIClasses.dart';
 import '../../util/LicenceKey.dart';
 import '../../util/ToastClass.dart';
